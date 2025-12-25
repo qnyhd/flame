@@ -49,8 +49,9 @@ public class Running : MonoBehaviour
 
         // 2. 空中检查：如果垂直速度不为0，则视为在空中
         // 此时直接返回，不应用跑动速度，避免与 Jumping 脚本的空中控制冲突
-        if (Mathf.Abs(rb.velocity.y) > 1e-3f)
+        if (Mathf.Abs(rb.velocity.y) > 1e-2f)
         {
+            Debug.Log(rb.velocity.y);
             return;
         }
 
