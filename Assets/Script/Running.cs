@@ -16,11 +16,13 @@ public class Running : MonoBehaviour
     public float turnSpeed = 30f;
 
     private Rigidbody2D rb;
+    private Animator anim;
     private float moveInput;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -34,6 +36,12 @@ public class Running : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             moveInput += 1f;
+        }
+
+        // 设置动画参数
+        if (anim != null)
+        {
+            anim.SetBool("isMoving", moveInput != 0);
         }
     }
 
@@ -51,7 +59,6 @@ public class Running : MonoBehaviour
         // 此时直接返回，不应用跑动速度，避免与 Jumping 脚本的空中控制冲突
         if (Mathf.Abs(rb.velocity.y) > 1e-2f)
         {
-            Debug.Log(rb.velocity.y);
             return;
         }
 
